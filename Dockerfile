@@ -42,13 +42,14 @@ RUN pip install --no-cache-dir --upgrade pip && \
 COPY . .
 
 # Create necessary directories
-RUN mkdir -p input_videos output_videos
+RUN mkdir -p input_videos output_videos web_app/static/css web_app/static/js
 
 # Set proper permissions
-RUN chmod +x *.py
+RUN chmod +x *.py && \
+    chmod -R 755 web_app/
 
-# Expose port if needed for web interface (optional)
+# Expose port for web interface
 EXPOSE 8000
 
-# Default command
-CMD ["python", "pullup.py"] 
+# Default command - run FastAPI web server
+CMD ["uvicorn", "web_app.main:app", "--host", "0.0.0.0", "--port", "8000"] 

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Pull-Up Counter</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🏋️ AI Pull-Up Counter</h1>
+            <p>Upload your pull-up video for intelligent analysis and form feedback</p>
+        </header>
+
+        <!-- Upload Section -->
+        <div id="uploadSection" class="upload-section">
+            <div class="upload-zone" id="uploadZone">
+                <div class="upload-content">
+                    <div class="upload-icon">📹</div>
+                    <h2>Drop your pull-up video here</h2>
+                    <p>or click to browse files</p>
+                    <div class="file-info">
+                        <small>Supported formats: MP4, AVI, MOV • Max size: 500MB</small>
+                    </div>
+                </div>
+                <input type="file" id="fileInput" accept="video/*" hidden>
+            </div>
+            
+            <div id="uploadStatus" class="upload-status" style="display: none;">
+                <div class="status-message" id="statusMessage"></div>
+                <div class="upload-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="uploadProgress"></div>
+                    </div>
+                    <span class="progress-text" id="uploadProgressText">0%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Processing Section -->
+        <div id="processingSection" class="processing-section" style="display: none;">
+            <div class="processing-header">
+                <h2>🤖 Processing Your Video</h2>
+                <p>Our AI is analyzing your pull-up form and counting repetitions</p>
+            </div>
+
+            <div class="progress-steps">
+                <div class="step" id="step1">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <div class="step-title">Frame Extraction</div>
+                        <div class="step-description">Extracting key frames from video</div>
+                    </div>
+                </div>
+                <div class="step" id="step2">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <div class="step-title">AI Analysis</div>
+                        <div class="step-description">Analyzing movement and form</div>
+                    </div>
+                </div>
+                <div class="step" id="step3">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <div class="step-title">Video Generation</div>
+                        <div class="step-description">Creating annotated output</div>
+                    </div>
+                </div>
+                <div class="step" id="step4">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <div class="step-title">Save Results</div>
+                        <div class="step-description">Finalizing analysis</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-progress">
+                <div class="progress-container">
+                    <div class="progress-bar large">
+                        <div class="progress-fill" id="mainProgressFill"></div>
+                    </div>
+                    <div class="progress-info">
+                        <div class="progress-details">
+                            <div class="progress-text" id="mainProgressText">Starting...</div>
+                            <div class="progress-percent" id="mainProgressPercent">0%</div>
+                        </div>
+                        <div class="eta-info">
+                            <div class="eta-text" id="etaText"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="processing-animation">
+                <div class="pulse-circle"></div>
+                <div class="pulse-circle delayed"></div>
+                <div class="pulse-circle delayed-2"></div>
+            </div>
+        </div>
+
+        <!-- Error Section -->
+        <div id="errorSection" class="error-section" style="display: none;">
+            <div class="error-content">
+                <div class="error-icon">❌</div>
+                <h2>Processing Error</h2>
+                <p id="errorMessage">An error occurred during processing.</p>
+                <button class="retry-button" onclick="resetToUpload()">Try Again</button>
+            </div>
+        </div>
+
+        <!-- Completion Section -->
+        <div id="completionSection" class="completion-section" style="display: none;">
+            <div class="completion-content">
+                <div class="success-icon">✅</div>
+                <h2>Processing Complete!</h2>
+                <p>Your pull-up analysis is ready to view.</p>
+                <div class="completion-actions">
+                    <button class="primary-button" id="viewResultsBtn">View Results</button>
+                    <button class="secondary-button" onclick="resetToUpload()">Process Another Video</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WebSocket connection indicator -->
+    <div class="connection-status" id="connectionStatus">
+        <div class="status-dot"></div>
+        <span>Connected</span>
+    </div>
+
+    <script src="/static/js/websocket.js"></script>
+    <script src="/static/js/progress.js"></script>
+    <script src="/static/js/upload.js"></script>
+</body>
+</html> 

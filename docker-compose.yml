@@ -4,6 +4,8 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: ai-pullup-counter
+    ports:
+      - "8000:8000"
     volumes:
       - .:/app
       - ./input_videos:/app/input_videos
@@ -17,7 +19,7 @@ services:
     stdin_open: true
     tty: true
     working_dir: /app
-    command: tail -f /dev/null  # Keep container running
+    command: uvicorn web_app.main:app --host 0.0.0.0 --port 8000 --reload
     depends_on:
       - setup-dirs
 
@@ -30,6 +32,8 @@ services:
       sh -c "
         mkdir -p /app/input_videos &&
         mkdir -p /app/output_videos &&
+        mkdir -p /app/web_app/static/css &&
+        mkdir -p /app/web_app/static/js &&
         echo 'Directories created successfully'
       "
 
