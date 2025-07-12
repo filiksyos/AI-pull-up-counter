@@ -1,6 +1,6 @@
 # AI Pull-Up Counter
 
-https://github.com/user-attachments/assets/e8096aa5-473d-4b9a-bc1a-bc41b9e3c7e1
+https://github.com/user-attachments/assets/1fa76ea3-129b-4c63-9b99-5784d0b8d38f
 
 An intelligent pull-up counter that uses computer vision and AI to analyze your pull-up form and count repetitions automatically.
 
