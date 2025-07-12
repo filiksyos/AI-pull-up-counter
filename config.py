@@ -18,4 +18,11 @@ IMAGE_QUALITY = 85         # JPEG quality for base64 encoding
 # Pull-Up Detection Thresholds
 CHIN_OVER_BAR_THRESHOLD = 0.1    # Relative position threshold
 FULL_EXTENSION_ANGLE = 170       # Elbow angle for full extension
-MIN_HOLD_TIME = 0.2             # Minimum time at top position 
+MIN_HOLD_TIME = 0.2             # Minimum time at top position
+
+# Web Server Configuration
+WEB_SERVER_HOST = "0.0.0.0"
+WEB_SERVER_PORT = 8000
+UPLOAD_DIR = "/app/input_videos"
+OUTPUT_DIR = "/app/output_videos"
+MAX_FILE_SIZE = 500 * 1024 * 1024  # 500MB limit 

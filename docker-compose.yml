@@ -1,0 +1,46 @@
+services:
+  pullup-counter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ai-pullup-counter
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      - ./input_videos:/app/input_videos
+      - ./output_videos:/app/output_videos
+    environment:
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+    env_file:
+      - .env
+    networks:
+      - pullup-network
+    stdin_open: true
+    tty: true
+    working_dir: /app
+    command: uvicorn web_app.main:app --host 0.0.0.0 --port 8000 --reload
+    depends_on:
+      - setup-dirs
+
+  setup-dirs:
+    image: busybox:latest
+    container_name: setup-directories
+    volumes:
+      - .:/app
+    command: >
+      sh -c "
+        mkdir -p /app/input_videos &&
+        mkdir -p /app/output_videos &&
+        mkdir -p /app/web_app/static/css &&
+        mkdir -p /app/web_app/static/js &&
+        echo 'Directories created successfully'
+      "
+
+networks:
+  pullup-network:
+    driver: bridge
+
+volumes:
+  input_videos:
+  output_videos: 
